@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LabWeek7BackendApplication {
+public class Week8LabBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LabWeek7BackendApplication.class, args);
+		SpringApplication.run(Week8LabBackendApplication.class, args);
 	}
 }
