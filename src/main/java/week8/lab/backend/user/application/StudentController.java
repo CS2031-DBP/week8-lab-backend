@@ -1,7 +1,7 @@
-package lab.week7.backend.user.application;
+package week8.lab.backend.user.application;
 
-import lab.week7.backend.user.domain.Student;
-import lab.week7.backend.user.domain.StudentService;
+import week8.lab.backend.user.domain.Student;
+import week8.lab.backend.user.domain.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

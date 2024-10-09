@@ -1,4 +1,4 @@
-package lab.week7.backend.config;
+package week8.lab.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

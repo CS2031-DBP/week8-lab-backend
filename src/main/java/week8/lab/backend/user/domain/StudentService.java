@@ -1,7 +1,7 @@
-package lab.week7.backend.user.domain;
+package week8.lab.backend.user.domain;
 
-import lab.week7.backend.user.exception.NotFoundException;
-import lab.week7.backend.user.infraestructure.StudentRepository;
+import week8.lab.backend.user.exception.NotFoundException;
+import week8.lab.backend.user.infraestructure.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package lab.week7.backend.user.domain;
+package week8.lab.backend.user.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
