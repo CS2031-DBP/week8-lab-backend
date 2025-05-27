@@ -1,15 +1,15 @@
 package week8.lab.backend.auth.application;
 
-import week8.lab.backend.auth.domain.AuthService;
-import week8.lab.backend.auth.dto.AuthResponseDto;
-import week8.lab.backend.auth.dto.LoginRequestDto;
-import week8.lab.backend.auth.dto.SignupResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import week8.lab.backend.auth.domain.AuthService;
+import week8.lab.backend.auth.dto.AuthResponseDto;
+import week8.lab.backend.auth.dto.LoginRequestDto;
+import week8.lab.backend.auth.dto.RegisterRequestDto;
 
 @RestController
 @RequestMapping("/auth")
@@ -22,8 +22,8 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(loginRequestDto));
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<AuthResponseDto> signup(@RequestBody SignupResponseDto signupResponseDto) {
-        return ResponseEntity.ok(authService.signup(signupResponseDto));
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterRequestDto registerRequestDto) {
+        return ResponseEntity.ok(authService.signup(registerRequestDto));
     }
 }

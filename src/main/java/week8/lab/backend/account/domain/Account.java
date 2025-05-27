@@ -1,9 +1,9 @@
-package week8.lab.backend.user.domain;
+package week8.lab.backend.account.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import week8.lab.backend.course.domain.Course;
@@ -13,36 +13,27 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
-@Table(name = "users")
-public class User implements UserDetails{
+@Getter
+@Setter
+public class Account implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(unique = true)
-    private String username;
-
-    @NonNull
-    private String firstname;
-
-    @NonNull
-    private String lastname;
-
-    @NonNull
     private String email;
 
-    @NonNull
+    private String firstname;
+
+    private String lastname;
+
     private String phone;
 
-    @NonNull
     private Integer age;
 
-    @NonNull
     private String description;
 
-    @NonNull
     private String password;
 
     @OneToMany
@@ -58,9 +49,8 @@ public class User implements UserDetails{
         return password;
     }
 
-    @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

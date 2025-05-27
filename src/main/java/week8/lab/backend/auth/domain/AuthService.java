@@ -1,20 +1,20 @@
 package week8.lab.backend.auth.domain;
 
-import week8.lab.backend.auth.dto.AuthResponseDto;
-import week8.lab.backend.auth.dto.LoginRequestDto;
-import week8.lab.backend.auth.dto.SignupResponseDto;
-import week8.lab.backend.config.JwtService;
-import week8.lab.backend.user.domain.User;
-import week8.lab.backend.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import week8.lab.backend.account.domain.Account;
+import week8.lab.backend.account.infrastructure.AccountRepository;
+import week8.lab.backend.auth.dto.AuthResponseDto;
+import week8.lab.backend.auth.dto.LoginRequestDto;
+import week8.lab.backend.auth.dto.RegisterRequestDto;
+import week8.lab.backend.config.JwtService;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     private final JwtService jwtService;
 
@@ -23,28 +23,28 @@ public class AuthService {
     private final ModelMapper modelMapper;
 
     public AuthResponseDto login(LoginRequestDto loginRequestDto) {
-        User user = userRepository.findByUsername(loginRequestDto.getUsername())
+        Account account = accountRepository.findByEmail(loginRequestDto.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(loginRequestDto.getPassword(), account.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 
         AuthResponseDto authResponseDto = new AuthResponseDto();
-        authResponseDto.setToken(jwtService.generateToken(user));
+        authResponseDto.setToken(jwtService.generateToken(account));
         return authResponseDto;
     }
 
-    public AuthResponseDto signup(SignupResponseDto signupResponseDto) {
-        if (userRepository.findByUsername(signupResponseDto.getUsername()).isPresent()) {
+    public AuthResponseDto signup(RegisterRequestDto registerRequestDto) {
+        if (accountRepository.findByEmail(registerRequestDto.getEmail()).isPresent()) {
             throw new RuntimeException("Email already exits");
         }
 
-        User user = modelMapper.map(signupResponseDto, User.class);
-        user.setPassword(passwordEncoder.encode(signupResponseDto.getPassword()));
-        userRepository.save(user);
+        Account account = modelMapper.map(registerRequestDto, Account.class);
+        account.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
+        accountRepository.save(account);
         AuthResponseDto authResponseDto = new AuthResponseDto();
-        authResponseDto.setToken(jwtService.generateToken(user));
+        authResponseDto.setToken(jwtService.generateToken(account));
         return authResponseDto;
     }
 }

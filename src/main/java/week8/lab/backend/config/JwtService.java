@@ -2,7 +2,6 @@ package week8.lab.backend.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import week8.lab.backend.user.domain.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +10,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import week8.lab.backend.account.domain.AccountService;
 
 import java.util.Date;
 
@@ -20,7 +20,7 @@ public class JwtService {
     @Value("${jwt.signing.key}")
     private String secret;
 
-    private final UserService userService;
+    private final AccountService accountService;
 
     public String extractUsername(String token) {
         return JWT.decode(token).getSubject();
@@ -39,7 +39,7 @@ public class JwtService {
 
     public void validateToken(String token, String userEmail) throws AuthenticationException {
         JWT.require(Algorithm.HMAC256(secret)).build().verify(token);
-        UserDetails userDetails = userService.loadUserByUsername(userEmail);
+        UserDetails userDetails = accountService.loadUserByUsername(userEmail);
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 userDetails,

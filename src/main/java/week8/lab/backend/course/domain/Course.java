@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-import week8.lab.backend.user.domain.User;
+import week8.lab.backend.account.domain.Account;
 
 @Entity
 @Getter
@@ -22,5 +22,5 @@ public class Course {
     private Boolean isCompleted = false;
 
     @ManyToOne
-    private User user;
+    private Account account;
 }

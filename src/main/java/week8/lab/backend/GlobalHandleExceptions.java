@@ -1,6 +1,6 @@
 package week8.lab.backend;
 
-import week8.lab.backend.user.exception.NotFoundException;
+import week8.lab.backend.account.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

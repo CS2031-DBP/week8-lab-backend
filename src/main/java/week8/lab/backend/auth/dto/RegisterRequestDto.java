@@ -7,12 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class SignupResponseDto {
-    private String username;
+public class RegisterRequestDto {
+    private String email;
 
     private String firstName;
 
     private String lastName;
+
+    private String phone;
+
+    private Integer age;
+
+    private String description;
 
     private String password;
 }
